@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite the paper below."
+title: "Stacked 2D-3D GNN for Multi-Label GHS Hazard Classification"
+abstract: >-
+  Code, dataset and trained weights for a stacked 2D-3D graph neural network
+  that predicts all 22 consolidated GHS hazard classes simultaneously from
+  molecular structure.
+type: software
+license: MIT
+repository-code: "https://github.com/dialoveyou/ghs-hybrid-gnn"
+authors:
+  - family-names: Kim
+    given-names: Dahee
+    affiliation: "Department of Environmental Engineering, Ajou University"
+    email: dahee02@ajou.ac.kr
+  - family-names: Jung
+    given-names: Seung-ho
+    affiliation: "Department of Environmental and Safety Engineering, Ajou University"
+    email: processsafety@ajou.ac.kr
+    orcid: "https://orcid.org/0000-0001-8339-441X"
+keywords:
+  - GHS hazard classification
+  - graph neural network
+  - multi-label classification
+  - molecular representation learning
+  - QSAR
+preferred-citation:
+  type: article
+  title: >-
+    A Stacked 2D-3D Graph Neural Network Framework for Comprehensive
+    Multi-Label GHS Hazard Classification from Molecular Structure
+  journal: "ACS Omega"
+  year: 2026
+  authors:
+    - family-names: Kim
+      given-names: Dahee
+    - family-names: Jung
+      given-names: Seung-ho
