@@ -1,0 +1,378 @@
+{
+  "n_labeled_chemicals": 14148,
+  "n_2d_success": 14148,
+  "n_3d_success": 14145,
+  "n_valid_both": 14145,
+  "baseline_best_val_f1": 0.5779905379859289,
+  "baseline_best_params": {
+    "lgb_n_estimators": 398,
+    "lgb_lr": 0.06408476856634113,
+    "lgb_depth": 6,
+    "xgb_n_estimators": 316,
+    "xgb_lr": 0.19774084036922238,
+    "xgb_depth": 3,
+    "et_n_estimators": 399,
+    "et_depth": 18
+  },
+  "baseline_test_macro_f1": 0.5728310126263149,
+  "gnn_last_epoch": 24,
+  "gnn_best_val_f1": 0.5221128748273005,
+  "stage2_final_results": {
+    "baseline_test_macro_f1": 0.5728310126263149,
+    "gnn_default_macro_f1": 0.5111698617809158,
+    "gnn_optthr_macro_f1": 0.5752546839768091,
+    "stacked_macro_f1": 0.6393615709063448,
+    "baseline_mcc_mean": 0.5135032522310216,
+    "baseline_mcc_std": 0.1572312429050558,
+    "gnn_mcc_mean": 0.43842518958411697,
+    "gnn_mcc_std": 0.17432135464391466,
+    "stacked_mcc_mean": 0.547093857747439,
+    "stacked_mcc_std": 0.14064887502553303,
+    "baseline_auc_mean": 0.8848632706177029,
+    "gnn_auc_mean": 0.83819210625982,
+    "stacked_auc_mean": 0.8860380683199768,
+    "baseline_ba_mean": 0.7076185706044986,
+    "gnn_ba_mean": 0.7197514749995048,
+    "stacked_ba_mean": 0.7527922404176092,
+    "per_class_report_stacked": {
+      "01_Explosive_SelfReactive": {
+        "precision": 0.9047619047619048,
+        "recall": 0.59375,
+        "f1-score": 0.7169811320754716,
+        "support": 32.0
+      },
+      "02_Flammable_Gas": {
+        "precision": 0.9,
+        "recall": 0.5625,
+        "f1-score": 0.6923076923076923,
+        "support": 16.0
+      },
+      "03_Gas_Under_Pressure": {
+        "precision": 0.875,
+        "recall": 0.7,
+        "f1-score": 0.7777777777777778,
+        "support": 30.0
+      },
+      "04_Flammable_Liquid": {
+        "precision": 0.8438228438228438,
+        "recall": 0.7801724137931034,
+        "f1-score": 0.8107502799552072,
+        "support": 464.0
+      },
+      "05_Flammable_Solid": {
+        "precision": 0.782608695652174,
+        "recall": 0.4090909090909091,
+        "f1-score": 0.5373134328358209,
+        "support": 44.0
+      },
+      "06_Spontaneous_Combustion": {
+        "precision": 0.7073170731707317,
+        "recall": 0.6904761904761905,
+        "f1-score": 0.6987951807228916,
+        "support": 42.0
+      },
+      "07_Oxidizing": {
+        "precision": 0.75,
+        "recall": 0.75,
+        "f1-score": 0.75,
+        "support": 48.0
+      },
+      "08_Corrosive_to_Metals": {
+        "precision": 0.5625,
+        "recall": 0.1836734693877551,
+        "f1-score": 0.27692307692307694,
+        "support": 49.0
+      },
+      "09_Acute_Toxicity_Oral": {
+        "precision": 0.6711079943899019,
+        "recall": 0.7453271028037384,
+        "f1-score": 0.7062730627306273,
+        "support": 1284.0
+      },
+      "10_Acute_Toxicity_Dermal": {
+        "precision": 0.5,
+        "recall": 0.6182902584493042,
+        "f1-score": 0.5528888888888889,
+        "support": 503.0
+      },
+      "11_Acute_Toxicity_Inhalation": {
+        "precision": 0.5935302390998594,
+        "recall": 0.6355421686746988,
+        "f1-score": 0.6138181818181818,
+        "support": 664.0
+      },
+      "12_Aspiration_Hazard": {
+        "precision": 0.7023809523809523,
+        "recall": 0.6483516483516484,
+        "f1-score": 0.6742857142857143,
+        "support": 91.0
+      },
+      "13_Skin_Corrosion_Irritation": {
+        "precision": 0.7835909631391201,
+        "recall": 0.7716627634660421,
+        "f1-score": 0.7775811209439528,
+        "support": 1708.0
+      },
+      "14_Eye_Damage_Irritation": {
+        "precision": 0.7646474677259185,
+        "recall": 0.8351409978308026,
+        "f1-score": 0.7983411093831001,
+        "support": 1844.0
+      },
+      "15_Sensitization": {
+        "precision": 0.5614617940199336,
+        "recall": 0.6101083032490975,
+        "f1-score": 0.5847750865051903,
+        "support": 554.0
+      },
+      "16_Mutagenicity": {
+        "precision": 0.5826771653543307,
+        "recall": 0.43023255813953487,
+        "f1-score": 0.49498327759197325,
+        "support": 172.0
+      },
+      "17_Carcinogenicity": {
+        "precision": 0.7010869565217391,
+        "recall": 0.4777777777777778,
+        "f1-score": 0.5682819383259912,
+        "support": 270.0
+      },
+      "18_Reproductive_Toxicity": {
+        "precision": 0.5555555555555556,
+        "recall": 0.5186170212765957,
+        "f1-score": 0.5364511691884457,
+        "support": 376.0
+      },
+      "19_STOT_Single_Exposure_Merged": {
+        "precision": 0.6653696498054474,
+        "recall": 0.6404494382022472,
+        "f1-score": 0.6526717557251909,
+        "support": 1335.0
+      },
+      "20_STOT_Repeated_Exposure": {
+        "precision": 0.7202380952380952,
+        "recall": 0.46808510638297873,
+        "f1-score": 0.567409144196952,
+        "support": 517.0
+      },
+      "21_Aquatic_Hazard": {
+        "precision": 0.6795224977043158,
+        "recall": 0.6751824817518248,
+        "f1-score": 0.6773455377574371,
+        "support": 1096.0
+      },
+      "22_Ozone_Layer_Hazard": {
+        "precision": 0.6,
+        "recall": 0.6,
+        "f1-score": 0.6,
+        "support": 5.0
+      },
+      "micro avg": {
+        "precision": 0.690566037735849,
+        "recall": 0.6896984924623115,
+        "f1-score": 0.6901319924575738,
+        "support": 11144.0
+      },
+      "macro avg": {
+        "precision": 0.7003263567428556,
+        "recall": 0.6065650276865567,
+        "f1-score": 0.6393615709063448,
+        "support": 11144.0
+      },
+      "weighted avg": {
+        "precision": 0.6933137468244714,
+        "recall": 0.6896984924623115,
+        "f1-score": 0.6877716326325508,
+        "support": 11144.0
+      },
+      "samples avg": {
+        "precision": 0.6789625792212306,
+        "recall": 0.7024238782979417,
+        "f1-score": 0.6445623349598538,
+        "support": 11144.0
+      }
+    },
+    "best_alphas": {
+      "01_Explosive_SelfReactive": 0.3313724746863802,
+      "02_Flammable_Gas": 0.13079292875550463,
+      "03_Gas_Under_Pressure": 0.22695041414103698,
+      "04_Flammable_Liquid": 0.00032440360789289316,
+      "05_Flammable_Solid": 0.010260638789862471,
+      "06_Spontaneous_Combustion": 0.005480937508700434,
+      "07_Oxidizing": 0.12245198427552154,
+      "08_Corrosive_to_Metals": 0.00469192307874089,
+      "09_Acute_Toxicity_Oral": 0.00010319773356185641,
+      "10_Acute_Toxicity_Dermal": 0.0028227019925965435,
+      "11_Acute_Toxicity_Inhalation": 0.10919797688438472,
+      "12_Aspiration_Hazard": 0.09160933174981589,
+      "13_Skin_Corrosion_Irritation": 0.10901220225511404,
+      "14_Eye_Damage_Irritation": 0.000981781777963306,
+      "15_Sensitization": 0.005430493923737137,
+      "16_Mutagenicity": 0.006691616842239983,
+      "17_Carcinogenicity": 0.002950806131386573,
+      "18_Reproductive_Toxicity": 0.010767171824476304,
+      "19_STOT_Single_Exposure_Merged": 0.08421257933500786,
+      "20_STOT_Repeated_Exposure": 0.005397935971728704,
+      "21_Aquatic_Hazard": 0.07803722676289365,
+      "22_Ozone_Layer_Hazard": 0.21612961739085257
+    },
+    "blend_thresholds": {
+      "01_Explosive_SelfReactive": 0.45916655882270724,
+      "02_Flammable_Gas": 0.566688724935598,
+      "03_Gas_Under_Pressure": 0.5352026700275482,
+      "04_Flammable_Liquid": 0.4516442508802008,
+      "05_Flammable_Solid": 0.33441913930335554,
+      "06_Spontaneous_Combustion": 0.37212948694545933,
+      "07_Oxidizing": 0.41140903188585837,
+      "08_Corrosive_to_Metals": 0.3389002705063573,
+      "09_Acute_Toxicity_Oral": 0.4327049315466348,
+      "10_Acute_Toxicity_Dermal": 0.23238846263044913,
+      "11_Acute_Toxicity_Inhalation": 0.32896805224314296,
+      "12_Aspiration_Hazard": 0.5040581866987057,
+      "13_Skin_Corrosion_Irritation": 0.5513286200124133,
+      "14_Eye_Damage_Irritation": 0.5575096961678461,
+      "15_Sensitization": 0.2652404304075787,
+      "16_Mutagenicity": 0.2605568610281501,
+      "17_Carcinogenicity": 0.2894020351892783,
+      "18_Reproductive_Toxicity": 0.2293219198078536,
+      "19_STOT_Single_Exposure_Merged": 0.49896575381889063,
+      "20_STOT_Repeated_Exposure": 0.3820410199282138,
+      "21_Aquatic_Hazard": 0.417852801815444,
+      "22_Ozone_Layer_Hazard": 0.39606764006472994
+    },
+    "gnn_thresholds": {
+      "01_Explosive_SelfReactive": 0.8476578513949253,
+      "02_Flammable_Gas": 0.7465385593254419,
+      "03_Gas_Under_Pressure": 0.4727267962555751,
+      "04_Flammable_Liquid": 0.6006900441151539,
+      "05_Flammable_Solid": 0.8935958749987258,
+      "06_Spontaneous_Combustion": 0.9404174841038329,
+      "07_Oxidizing": 0.6788471244553342,
+      "08_Corrosive_to_Metals": 0.6455927094340451,
+      "09_Acute_Toxicity_Oral": 0.3148119125365185,
+      "10_Acute_Toxicity_Dermal": 0.49771770485459493,
+      "11_Acute_Toxicity_Inhalation": 0.4622899287367547,
+      "12_Aspiration_Hazard": 0.6849004950537052,
+      "13_Skin_Corrosion_Irritation": 0.28760502386907644,
+      "14_Eye_Damage_Irritation": 0.05065980337951274,
+      "15_Sensitization": 0.4565991999568068,
+      "16_Mutagenicity": 0.8021558923942776,
+      "17_Carcinogenicity": 0.6430191425868005,
+      "18_Reproductive_Toxicity": 0.5426777616954426,
+      "19_STOT_Single_Exposure_Merged": 0.30305200877197647,
+      "20_STOT_Repeated_Exposure": 0.4940966275657732,
+      "21_Aquatic_Hazard": 0.4152093929432154,
+      "22_Ozone_Layer_Hazard": 0.8505268779161358
+    }
+  },
+  "cv_baseline_f1_mean": 0.5805747834929882,
+  "cv_baseline_f1_std": 0.0157230586330538,
+  "cv_baseline_folds": [
+    0.5715200940119055,
+    0.5754232118325221,
+    0.6107272164670016,
+    0.5793558577544862,
+    0.5658475373990255
+  ],
+  "scaffold_baseline_f1": 0.45425251336213945,
+  "bootstrap_results": {
+    "Baseline -> GNN": {
+      "mean_diff": 0.002162621839004492,
+      "ci_low": -0.021577540671255998,
+      "ci_high": 0.024328224703099872,
+      "p": 0.846
+    },
+    "Baseline -> Stacked": {
+      "mean_diff": 0.06644694914586063,
+      "ci_low": 0.0547083807158487,
+      "ci_high": 0.07854942933031915,
+      "p": 0.0
+    },
+    "GNN -> Stacked": {
+      "mean_diff": 0.06428432730685614,
+      "ci_low": 0.043809525868283926,
+      "ci_high": 0.08644409360796439,
+      "p": 0.0
+    }
+  },
+  "shap_summary": {
+    "14_Eye_Damage_Irritation": {
+      "fingerprint_total": 2.4861992860503395,
+      "descriptor_total": 0.9441126718072431,
+      "top_descriptors": [
+        [
+          "LogP",
+          0.24663103188647847
+        ],
+        [
+          "MolMR",
+          0.10632632647349505
+        ],
+        [
+          "BertzCT",
+          0.07549652450082305
+        ],
+        [
+          "FractionCSP3",
+          0.07096782700350766
+        ],
+        [
+          "MolWt",
+          0.06624875995785892
+        ]
+      ]
+    },
+    "16_Mutagenicity": {
+      "fingerprint_total": 4.4626791003080015,
+      "descriptor_total": 1.2095957229246816,
+      "top_descriptors": [
+        [
+          "MolMR",
+          0.22894341822354083
+        ],
+        [
+          "NumRotatableBonds",
+          0.15423783384768103
+        ],
+        [
+          "LogP",
+          0.12025390447757903
+        ],
+        [
+          "NumHAcceptors",
+          0.10673129726395207
+        ],
+        [
+          "LabuteASA",
+          0.10024492962653421
+        ]
+      ]
+    },
+    "08_Corrosive_to_Metals": {
+      "fingerprint_total": 6.540970516252781,
+      "descriptor_total": 1.4829606100720198,
+      "top_descriptors": [
+        [
+          "MolMR",
+          0.34135791667232684
+        ],
+        [
+          "NumHeteroatoms",
+          0.15383009434121694
+        ],
+        [
+          "LogP",
+          0.14506598194869794
+        ],
+        [
+          "BertzCT",
+          0.1420582192083762
+        ],
+        [
+          "MolWt",
+          0.1382801002885672
+        ]
+      ]
+    }
+  }
+}
