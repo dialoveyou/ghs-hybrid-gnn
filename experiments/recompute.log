@@ -1,0 +1,54 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+tree         F1@0.5 0.5608 | F1 0.6264 | MCC 0.519±0.145 | AUC 0.879 | BA 0.746
+d2_alone     F1@0.5 0.5041 | F1 0.5860 | MCC 0.451±0.161 | AUC 0.843 | BA 0.728
+d3_alone     F1@0.5 0.2306 | F1 0.3961 | MCC 0.214±0.156 | AUC 0.760 | BA 0.643
+both_alone   F1@0.5 0.4842 | F1 0.5777 | MCC 0.444±0.157 | AUC 0.844 | BA 0.726
+stack_d3     F1@0.5 0.5398 | F1 0.6271 | MCC 0.519±0.151 | AUC 0.879 | BA 0.747
+stack_d2     F1@0.5 0.5906 | F1 0.6338 | MCC 0.527±0.149 | AUC 0.880 | BA 0.751
+stack_both   F1@0.5 0.5905 | F1 0.6369 | MCC 0.530±0.145 | AUC 0.878 | BA 0.754
+
+=== per-class, new best model (tree + 2D-3D hybrid, calibrated) ===
+  Explosive SelfReactive       P 0.95 R 0.56 Sp 1.000 NPV 0.995 F1 0.71  n=32
+  Flammable Gas                P 0.83 R 0.62 Sp 0.999 NPV 0.998 F1 0.71  n=16
+  Gas Under Pressure           P 0.86 R 0.63 Sp 0.999 NPV 0.996 F1 0.73  n=30
+  Flammable Liquid             P 0.83 R 0.83 Sp 0.965 NPV 0.967 F1 0.83  n=464
+  Flammable Solid              P 0.46 R 0.41 Sp 0.992 NPV 0.991 F1 0.43  n=44
+  Spontaneous Combustion       P 0.60 R 0.76 Sp 0.992 NPV 0.996 F1 0.67  n=42
+  Oxidizing                    P 0.75 R 0.75 Sp 0.996 NPV 0.996 F1 0.75  n=48
+  Corrosive to Metals          P 0.52 R 0.31 Sp 0.995 NPV 0.988 F1 0.38  n=49
+  Acute Toxicity Oral          P 0.65 R 0.84 Sp 0.616 NPV 0.817 F1 0.73  n=1284
+  Acute Toxicity Dermal        P 0.47 R 0.68 Sp 0.833 NPV 0.922 F1 0.55  n=503
+  Acute Toxicity Inhalation    P 0.61 R 0.56 Sp 0.886 NPV 0.867 F1 0.58  n=664
+  Aspiration Hazard            P 0.72 R 0.64 Sp 0.992 NPV 0.988 F1 0.67  n=91
+  Skin Corrosion Irritation    P 0.73 R 0.87 Sp 0.504 NPV 0.721 F1 0.80  n=1708
+  Eye Damage Irritation        P 0.73 R 0.89 Sp 0.368 NPV 0.643 F1 0.80  n=1844
+  Sensitization                P 0.57 R 0.56 Sp 0.896 NPV 0.892 F1 0.57  n=554
+  Mutagenicity                 P 0.46 R 0.48 Sp 0.962 NPV 0.966 F1 0.47  n=172
+  Carcinogenicity              P 0.61 R 0.53 Sp 0.964 NPV 0.951 F1 0.57  n=270
+  Reproductive Toxicity        P 0.58 R 0.45 Sp 0.950 NPV 0.918 F1 0.51  n=376
+  STOT Single Exposure Merged  P 0.58 R 0.85 Sp 0.449 NPV 0.765 F1 0.69  n=1335
+  STOT Repeated Exposure       P 0.49 R 0.69 Sp 0.835 NPV 0.922 F1 0.57  n=517
+  Aquatic Hazard               P 0.62 R 0.73 Sp 0.719 NPV 0.805 F1 0.67  n=1096
+  Ozone Layer Hazard           P 0.60 R 0.60 Sp 0.999 NPV 0.999 F1 0.60  n=5
+
+=== bootstrap 95% CI, support < 50 ===
+  Explosive SelfReactive       [0.54, 0.84]
+  Flammable Gas                [0.48, 0.89]
+  Gas Under Pressure           [0.57, 0.86]
+  Flammable Solid              [0.29, 0.56]
+  Spontaneous Combustion       [0.56, 0.78]
+  Oxidizing                    [0.64, 0.84]
+  Corrosive to Metals          [0.24, 0.52]
+  Ozone Layer Hazard           [0.00, 0.92]
+
+=== Fuadah-overlapping endpoints, new model ===
+  09 Acute Toxicity Oral         AUC 0.809  F1 0.731  BalAcc 0.726
+  10 Acute Toxicity Dermal       AUC 0.828  F1 0.554  BalAcc 0.754
+  11 Acute Toxicity Inhalation   AUC 0.820  F1 0.583  BalAcc 0.724
+  13 Skin Corrosion/Irritation   AUC 0.798  F1 0.798  BalAcc 0.689
+  14 Eye Damage/Irritation       AUC 0.757  F1 0.804  BalAcc 0.631
+  15 Sensitization               AUC 0.822  F1 0.566  BalAcc 0.729
+  Mean                           AUC 0.806  F1 0.673  BalAcc 0.709
+
+saved new_tables.json

@@ -1,18 +1,54 @@
-# Stacked 2D–3D GNN for Multi-Label GHS Hazard Classification
+# Threshold Calibration vs. 3D Structure in Multi-Label GHS Hazard Classification
 
-Code, data and trained weights for:
+Code, data, trained weights and experiment scripts for:
 
-> Kim, D.; Jung, S.-h. *A Stacked 2D–3D Graph Neural Network Framework for Comprehensive Multi-Label GHS Hazard Classification from Molecular Structure.* ACS Omega (submitted).
+> Kim, D.; Jung, S.-h. *Per-Class Threshold Calibration Outweighs 3D Structural Information in
+> Severely Imbalanced Multi-Label GHS Hazard Classification.* ACS Omega (submitted).
 
-The model predicts all **22 consolidated GHS hazard classes simultaneously** from molecular
-structure, by stacking a 2D tree-ensemble baseline with a 3D graph neural network whose
-molecular graph augments covalent bonds with distance-weighted non-covalent proximity edges
-(≤ 5 Å), coupled to a differentiable classifier chain.
+The task is predicting all **22 consolidated GHS hazard classes simultaneously** from molecular
+structure, on a regulatory-scale inventory at its native 341-fold class imbalance. The question the
+paper asks is not "does a 3D graph neural network help?" but **which modelling choices actually
+govern performance** once everything else is held fixed.
 
-The central result is that the 3D branch is **not** a better standalone predictor than 2D
-fingerprints (Δ macro-F1 = −0.017, p = 0.176), but the two representations combine to give a
-significant improvement that neither achieves alone (stacked macro-F1 0.660; +0.042 over the
-baseline, p < 0.001).
+## The central result
+
+Holding the fitted model, the data and the partition constant, and changing only the decision rule:
+
+| 2D tree ensemble, evaluated under | Macro-F1 |
+|---|---|
+| a fixed 0.5 threshold | 0.561 |
+| per-class thresholds calibrated on a held-out validation set | **0.626** |
+
+That is **+0.066** for free. The same contrast holds under five-fold cross-validation
+(0.567 ± 0.017 → 0.644 ± 0.015) and is largest exactly where generalization is hardest, under a
+Murcko-scaffold-disjoint split (0.453 → 0.539, **+0.086**).
+
+Against that, changing the molecular representation buys very little. With every model calibrated
+identically and trained on an identical sample set:
+
+| Model | Macro-F1 (calibrated) |
+|---|---|
+| 2D tree ensemble | 0.626 |
+| 2D-only MLP-ECC | 0.586 |
+| 2D–3D hybrid GNN-ECC | 0.578 |
+| 3D-only GNN-ECC | 0.396 |
+| Stacked: tree + 3D-only | 0.627 |
+| Stacked: tree + 2D-only | 0.634 |
+| **Stacked: tree + 2D–3D hybrid** | **0.637** |
+
+A 3D-only model reaches 0.396 against 0.626 for 2D fingerprints, and adding the 3D branch to a
+2D-only neural model makes it slightly *worse*. Inside the stack, the increment attributable to the
+3D branch is **+0.003 (paired bootstrap, p = 0.51)** — indistinguishable from zero. The residual
++0.010 of the best stack over the calibrated tree ensemble is model-family diversity, not 3D
+information.
+
+### Why this is easy to get wrong
+
+Comparing the stacked model against the tree ensemble **at a fixed 0.5 threshold** — a common and
+superficially reasonable choice — measures **+0.067, p < 0.001**, which looks like strong evidence
+of 2D–3D complementarity. Almost all of it is the calibration the stacked model received and the
+baseline did not. `experiments/p0_baseline.py` and `experiments/p0_stacked.py` reproduce both the
+confounded and the matched comparison side by side.
 
 ---
 
@@ -20,27 +56,39 @@ baseline, p < 0.001).
 
 ```
 src/
-  ghs_full_pipeline.py     single-file reference implementation (same logic as the notebook)
+  ghs_full_pipeline.py     single-file reference implementation
   run_full_pipeline.py     Stage 1 — data loading, 22-class labelling, 2D/3D feature extraction
   run_stage2.py            Stage 2 — splits, augmentation, baseline + GNN training, stacking
   run_stage3.py            Stage 3 — 5-fold CV, scaffold split, bootstrap tests, SHAP
-  analysis/
-    head_to_head_endpoints.py          per-endpoint AUC/F1/BalAcc for the six
-    head_to_head_endpoints_snippet.py  Fuadah-overlapping endpoints (Table 7)
+  analysis/                per-endpoint metrics for the Fuadah-overlapping comparison
+experiments/               the analyses reported in the paper
+  features.py              22-class labels, 916-d 2D features, 3D conformer graphs (cached)
+  p0_baseline.py           tree ensemble under four fit/threshold protocols
+  p0_stacked.py            reconstructs the stacked model, paired bootstrap vs each baseline
+  ablation.py              2D-only / 3D-only / 2D–3D, one split, one protocol, no augmentation
+  abl_boot.py              paired bootstrap for the ablation contrasts
+  stage3.py                scaffold-disjoint split and 5-fold CV with calibrated thresholds
+  recompute_tables.py      per-class tables, low-support CIs, head-to-head endpoints
+  make_figures.py          Figures 4 and 5
+  *.json / *.log           results and run logs for every script above
 notebooks/
-  GHS_Hybrid_GNN_ECC.ipynb  end-to-end notebook version (Colab-ready)
+  GHS_Hybrid_GNN_ECC.ipynb end-to-end notebook version (Colab-ready)
 data/
   ghs_modeling_dataset_14148.csv  14,148 curated compounds with GHS H-codes
 checkpoints/
-  hybrid_gnn_ecc_ghs22.pt   trained hybrid GNN-ECC weights
+  hybrid_gnn_ecc_ghs22.pt  trained hybrid GNN-ECC weights
 results/
-  metrics.json              full metric dump from a complete end-to-end run
-  reproduction_summary.md      results of the reference CPU-only run
+  metrics.json             full metric dump from a complete end-to-end run
+  reproduction_summary.md  results of the reference run
 ```
 
-Stages 1–3 are **checkpointed and resumable**: every stage caches its intermediate state, so an
-interrupted run (a dropped Colab runtime, for instance) continues from where it stopped when the
-same script is run again. All results accumulate into a single `metrics.json`.
+**`src/` and `experiments/` are not interchangeable.** `src/` is the original pipeline; the
+comparison built into `src/run_stage2.py` scores the tree-ensemble baseline at a fixed 0.5
+threshold while giving the GNN and the stacked model per-class tuned thresholds, so running it
+end to end reproduces the *confounded* +0.066 gap rather than the paper's numbers. `experiments/`
+re-scores the same fitted models under one protocol applied to all of them, and is what the paper
+reports. `results/reproduction_summary.md` documents the legacy run and the exact lines where the
+protocols diverge.
 
 ## Installation
 
@@ -54,62 +102,52 @@ pip install -r requirements.txt
 
 `torch-geometric` may need a wheel matching your CUDA/PyTorch build; see the
 [PyG installation guide](https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html).
-A GPU is optional — the pipeline runs end to end on CPU, only more slowly.
+A GPU is optional — everything reported in the paper was produced on CPU.
 
-## Running the pipeline
+## Reproducing the paper
 
 ```bash
-export GHS_WORKDIR=./work          # where caches, checkpoints and metrics.json are written
-mkdir -p "$GHS_WORKDIR"
-cp data/ghs_modeling_dataset_14148.csv "$GHS_WORKDIR/_wip_modeling_subset_14148.csv"
-
-python src/run_full_pipeline.py    # Stage 1  (~8 min, CPU)
-python src/run_stage2.py           # Stage 2  (~1 h on 2 CPU cores; much faster with a GPU)
-python src/run_stage3.py           # Stage 3  (~35 min)
+python experiments/features.py        # ~6 min, caches features.pkl
+python experiments/p0_baseline.py     # tree ensemble under four protocols  (~8 min)
+python experiments/ablation.py        # the three representations + stacks  (~5 min)
+python experiments/abl_boot.py        # paired bootstrap                    (~4 min)
+python experiments/stage3.py          # scaffold split + 5-fold CV          (~25 min)
+python experiments/recompute_tables.py
+python experiments/make_figures.py
 ```
 
-`GHS_WORKDIR` defaults to `<repo>/work` if unset. Measured wall-clock on 2 CPU cores with no
-GPU was about 1 h 45 min in total, dominated by the baseline Optuna search (~45 min) and the
-5-fold cross-validation (~30 min); both shorten substantially with more cores.
-
-To reproduce only the head-to-head comparison against Fuadah et al. (Table 7), run the notebook
-through its ROC-AUC / Balanced-Accuracy section and then execute
-`src/analysis/head_to_head_endpoints.py`, which expects the fitted objects to be in memory.
+Every script writes a `*_results.json` next to itself; those files are the source of every number
+in the paper.
 
 ## Reproducibility
 
-Seeds are fixed (`SEED = 42`) and the multi-label stratified split is deterministic, so the
-data-processing stages reproduce exactly:
+Seeds are fixed (`SEED = 42`) and the splits are deterministic, so the data stages reproduce
+exactly:
 
 | Quantity | This code | Reported in paper |
 |---|---|---|
 | Compounds with GHS labels | 14,148 | 14,148 |
 | Successful 3D embeddings | 14,145 (0.02% failure) | 14,145 (0.02% failure) |
-| Augmented classes | 13 | 13 |
+| Random split train/val/test | 9,061 / 2,281 / 2,803 | 9,061 / 2,281 / 2,803 |
 | Unique Murcko scaffolds | 8,114 | 8,114 |
 | Scaffold split train/test | 9,742 / 4,403 | 9,742 / 4,403 |
 
-**Model metrics carry ordinary run-to-run variance.** The headline values in the paper
-(Table 2: baseline 0.618, GNN-ECC 0.602, stacked 0.660) were obtained on GPU hardware. A
-complete CPU-only run of this repository — the one recorded in `results/metrics.json` and
-described in §4.9 of the paper — gives 0.573, 0.575 and 0.639 respectively: uniformly 0.01–0.05
-lower, with the ordering and every qualitative conclusion unchanged (stacking significantly
-beats both constituents at p < 0.001; scaffold splitting costs ~12–15 macro-F1 points; SHAP
-ranks LogP and molar refractivity top among descriptors). Expect numbers in that band rather
-than an exact match to Table 2, and compare **within** a single run.
-
-The checkpoint in `checkpoints/` is from that CPU-only run.
+Model metrics carry ordinary run-to-run variance of roughly ±0.01–0.02 macro-F1 from GNN
+initialisation and sampler order; the tree-ensemble numbers are deterministic given the split. The
+qualitative conclusions — that calibration is worth several times more than representation, and
+that the 3D increment is indistinguishable from zero — do not depend on that variance.
 
 ## Data
 
-`data/ghs_modeling_dataset_14148.csv` — 14,148 single-substance chemicals, each with a CAS
-Registry Number, PubChem CID, canonical SMILES, 15 physicochemical properties, NFPA
-Health/Fire/Reactivity ratings where available, and one or more GHS H-codes.
+`data/ghs_modeling_dataset_14148.csv` — 14,148 single-substance chemicals with CAS number, PubChem
+CID, canonical SMILES, physicochemical properties, NFPA ratings where available, and GHS H-codes.
+Assembled from the KOSHA chemical database and the Dangjin City industrial chemical usage registry,
+with structures retrieved through the PubChem PUG REST API. See `data/README.md` for the column
+schema and the 73 H-code → 22 class mapping.
 
-Assembled from the Korea Occupational Safety and Health Agency (KOSHA) chemical database and
-the Dangjin City industrial chemical usage registry, with structures and properties retrieved
-through the PubChem PUG REST API. Mixtures and entries without a valid single-substance SMILES
-were excluded. See `data/README.md` for the column schema and the 73 H-code → 22 class mapping.
+Note that unobserved H-codes are treated as negatives: only substances carrying at least one valid
+H-code are retained, so absence within such a record is closer to non-applicability than to a
+missing observation. This assumption is stated and discussed in the paper.
 
 ## License
 

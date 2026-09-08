@@ -1,10 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this software or dataset, please cite the paper below."
-title: "Stacked 2D-3D GNN for Multi-Label GHS Hazard Classification"
+title: "Threshold Calibration vs. 3D Structure in Multi-Label GHS Hazard Classification"
 abstract: >-
-  Code, dataset and trained weights for a stacked 2D-3D graph neural network
-  that predicts all 22 consolidated GHS hazard classes simultaneously from
-  molecular structure.
+  Code, dataset, trained weights and experiment scripts for a study of which
+  modelling choices govern multi-label GHS hazard prediction at regulatory
+  scale: per-class decision-threshold calibration is worth several times more
+  macro-F1 than adding a 3D molecular representation.
 type: software
 license: MIT
 repository-code: "https://github.com/dialoveyou/ghs-hybrid-gnn"
@@ -20,6 +21,8 @@ authors:
     orcid: "https://orcid.org/0000-0001-8339-441X"
 keywords:
   - GHS hazard classification
+  - decision-threshold calibration
+  - class imbalance
   - graph neural network
   - multi-label classification
   - molecular representation learning
@@ -27,8 +30,8 @@ keywords:
 preferred-citation:
   type: article
   title: >-
-    A Stacked 2D-3D Graph Neural Network Framework for Comprehensive
-    Multi-Label GHS Hazard Classification from Molecular Structure
+    Per-Class Threshold Calibration Outweighs 3D Structural Information in
+    Severely Imbalanced Multi-Label GHS Hazard Classification
   journal: "ACS Omega"
   year: 2026
   authors:

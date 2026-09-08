@@ -1,0 +1,21 @@
+{
+  "2D+3D GNN-ECC": {
+    "alone_thr0.5": 0.4841574580116358,
+    "alone_thrTuned": 0.5776849438942778,
+    "stacked_with_tree": 0.6368969912100894
+  },
+  "2D-only MLP-ECC": {
+    "alone_thr0.5": 0.5041120733968915,
+    "alone_thrTuned": 0.585951786409371,
+    "stacked_with_tree": 0.6338142146723371
+  },
+  "3D-only GNN-ECC": {
+    "alone_thr0.5": 0.23057422818776807,
+    "alone_thrTuned": 0.39605366953027676,
+    "stacked_with_tree": 0.6270529629522549
+  },
+  "2D tree ensemble (baseline)": {
+    "alone_thr0.5": 0.5608235208248546,
+    "alone_thrTuned": 0.6263692505346113
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "A_trainval_thr0.5": 0.5728310126263149,
+  "B_train_thr0.5": 0.5608235208248546,
+  "B_train_thrOptuna": 0.6239105481369033,
+  "B_train_thrGrid": 0.62686067178909,
+  "C_trainval_thrGrid_LEAKY": 0.6443579971088327
+}

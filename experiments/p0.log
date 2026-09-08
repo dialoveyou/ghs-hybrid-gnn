@@ -1,0 +1,15 @@
+[02:44:46] loaded features: (14145, 916)
+[02:44:47] split  train 9061 | val 2281 | test 2803   (paper: 9061 / 2281 / 2803)
+[02:44:47] fitting tree ensemble on train+val ...
+[02:48:26]   done (219s)
+[02:48:34]   A  fit train+val, threshold 0.5      test macro-F1 = 0.5728   <-- paper reports 0.5728
+[02:48:34] fitting tree ensemble on train only ...
+[02:51:30]   done (176s)
+[02:51:38]   B0 fit train,     threshold 0.5      test macro-F1 = 0.5608
+[02:51:38] optimizing per-class thresholds on validation (Optuna-50, the paper's procedure) ...
+[02:51:42]   B1 fit train,     Optuna-50 thr      test macro-F1 = 0.6239
+[02:51:42] optimizing per-class thresholds on validation (dense 1000-point grid) ...
+[02:52:20]   B2 fit train,     grid-1000 thr      test macro-F1 = 0.6269
+[02:52:57]   C  fit train+val, grid thr on val    test macro-F1 = 0.6444  (leaky)
+[02:52:57] saved p0_store.pkl / p0_results.json
+[02:52:57] RESULTS {"A_trainval_thr0.5": 0.5728310126263149, "B_train_thr0.5": 0.5608235208248546, "B_train_thrOptuna": 0.6239105481369033, "B_train_thrGrid": 0.62686067178909, "C_trainval_thrGrid_LEAKY": 0.6443579971088327}

@@ -1,0 +1,83 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[03:10:00] --- training 2D+3D GNN-ECC ---
+[03:10:04]   ep01 train f1 0.3801 | val f1 0.2674 | 4s
+[03:10:08]   ep02 train f1 0.5956 | val f1 0.3225 | 4s
+[03:10:12]   ep03 train f1 0.6690 | val f1 0.3580 | 4s
+[03:10:17]   ep04 train f1 0.7191 | val f1 0.3787 | 4s
+[03:10:21]   ep05 train f1 0.7404 | val f1 0.3934 | 5s
+[03:10:27]   ep06 train f1 0.7596 | val f1 0.4016 | 5s
+[03:10:32]   ep07 train f1 0.7775 | val f1 0.4216 | 5s
+[03:10:37]   ep08 train f1 0.7727 | val f1 0.4198 | 6s
+[03:10:43]   ep09 train f1 0.7970 | val f1 0.4426 | 5s
+[03:10:47]   ep10 train f1 0.8101 | val f1 0.4480 | 5s
+[03:10:52]   ep11 train f1 0.8192 | val f1 0.4304 | 5s
+[03:10:57]   ep12 train f1 0.8224 | val f1 0.4550 | 5s
+[03:11:02]   ep13 train f1 0.8317 | val f1 0.4515 | 5s
+[03:11:07]   ep14 train f1 0.8350 | val f1 0.4592 | 5s
+[03:11:12]   ep15 train f1 0.8442 | val f1 0.4628 | 5s
+[03:11:17]   ep16 train f1 0.8443 | val f1 0.4722 | 5s
+[03:11:22]   ep17 train f1 0.8520 | val f1 0.4716 | 5s
+[03:11:27]   ep18 train f1 0.8598 | val f1 0.4723 | 5s
+[03:11:32]   ep19 train f1 0.8623 | val f1 0.4623 | 5s
+[03:11:37]   ep20 train f1 0.8687 | val f1 0.4763 | 5s
+[03:11:42]   ep21 train f1 0.8660 | val f1 0.4709 | 5s
+[03:11:47]   ep22 train f1 0.8630 | val f1 0.4825 | 5s
+[03:11:52]   ep23 train f1 0.8707 | val f1 0.4956 | 5s
+[03:11:57]   ep24 train f1 0.8602 | val f1 0.4534 | 5s
+[03:12:02]   ep25 train f1 0.8705 | val f1 0.4775 | 5s
+[03:12:07]   ep26 train f1 0.8383 | val f1 0.4359 | 5s
+[03:12:12]   ep27 train f1 0.8563 | val f1 0.4532 | 5s
+[03:12:17]   ep28 train f1 0.8741 | val f1 0.4810 | 5s
+[03:12:22]   ep29 train f1 0.8844 | val f1 0.4947 | 5s
+[03:12:22]   early stop
+[03:12:23]   2D+3D GNN-ECC: alone@0.5 0.4842 | alone@tuned 0.5777
+[03:12:23] --- training 2D-only MLP-ECC ---
+[03:12:26]   ep01 train f1 0.3471 | val f1 0.2868 | 3s
+[03:12:28]   ep02 train f1 0.6031 | val f1 0.3309 | 3s
+[03:12:31]   ep03 train f1 0.6798 | val f1 0.3676 | 3s
+[03:12:34]   ep04 train f1 0.7208 | val f1 0.3790 | 3s
+[03:12:37]   ep05 train f1 0.7228 | val f1 0.3781 | 3s
+[03:12:40]   ep06 train f1 0.7497 | val f1 0.3932 | 3s
+[03:12:42]   ep07 train f1 0.7637 | val f1 0.4341 | 3s
+[03:12:45]   ep08 train f1 0.7812 | val f1 0.4077 | 3s
+[03:12:47]   ep09 train f1 0.7896 | val f1 0.4047 | 3s
+[03:12:50]   ep10 train f1 0.8033 | val f1 0.4604 | 3s
+[03:12:53]   ep11 train f1 0.8136 | val f1 0.4529 | 3s
+[03:12:55]   ep12 train f1 0.8273 | val f1 0.4488 | 3s
+[03:12:58]   ep13 train f1 0.8278 | val f1 0.4332 | 3s
+[03:13:00]   ep14 train f1 0.8320 | val f1 0.4468 | 3s
+[03:13:03]   ep15 train f1 0.8473 | val f1 0.4832 | 3s
+[03:13:06]   ep16 train f1 0.8565 | val f1 0.4815 | 3s
+[03:13:08]   ep17 train f1 0.8632 | val f1 0.4882 | 3s
+[03:13:11]   ep18 train f1 0.8670 | val f1 0.4901 | 2s
+[03:13:13]   ep19 train f1 0.8727 | val f1 0.4920 | 2s
+[03:13:16]   ep20 train f1 0.8747 | val f1 0.4836 | 3s
+[03:13:18]   ep21 train f1 0.8742 | val f1 0.4833 | 2s
+[03:13:21]   ep22 train f1 0.8784 | val f1 0.4985 | 2s
+[03:13:23]   ep23 train f1 0.8779 | val f1 0.4962 | 2s
+[03:13:26]   ep24 train f1 0.8814 | val f1 0.4961 | 3s
+[03:13:28]   ep25 train f1 0.8842 | val f1 0.4933 | 2s
+[03:13:31]   ep26 train f1 0.8875 | val f1 0.4970 | 3s
+[03:13:33]   ep27 train f1 0.8925 | val f1 0.4938 | 3s
+[03:13:36]   ep28 train f1 0.8973 | val f1 0.4966 | 3s
+[03:13:36]   early stop
+[03:13:36]   2D-only MLP-ECC: alone@0.5 0.5041 | alone@tuned 0.5860
+[03:13:36] --- training 3D-only GNN-ECC ---
+[03:13:40]   ep01 train f1 0.3029 | val f1 0.1559 | 4s
+[03:13:44]   ep02 train f1 0.3251 | val f1 0.1623 | 4s
+[03:13:49]   ep03 train f1 0.3598 | val f1 0.1896 | 4s
+[03:13:52]   ep04 train f1 0.3882 | val f1 0.1798 | 4s
+[03:13:56]   ep05 train f1 0.4026 | val f1 0.2257 | 4s
+[03:14:00]   ep06 train f1 0.4182 | val f1 0.2224 | 4s
+[03:14:04]   ep07 train f1 0.4272 | val f1 0.2059 | 4s
+[03:14:08]   ep08 train f1 0.4461 | val f1 0.2189 | 4s
+[03:14:12]   ep09 train f1 0.4390 | val f1 0.2137 | 4s
+[03:14:16]   ep10 train f1 0.4540 | val f1 0.2284 | 4s
+[03:14:20]   ep11 train f1 0.4783 | val f1 0.2241 | 4s
+[03:14:20]   early stop
+[03:14:21]   3D-only GNN-ECC: alone@0.5 0.2306 | alone@tuned 0.3961
+[03:14:21]   stacked tree + 2D+3D GNN-ECC: 0.6369
+[03:14:21]   stacked tree + 2D-only MLP-ECC: 0.6338
+[03:14:22]   stacked tree + 3D-only GNN-ECC: 0.6271
+[03:14:22] RESULTS {"2D+3D GNN-ECC": {"alone_thr0.5": 0.4841574580116358, "alone_thrTuned": 0.5776849438942778, "stacked_with_tree": 0.6368969912100894}, "2D-only MLP-ECC": {"alone_thr0.5": 0.5041120733968915, "alone_thrTuned": 0.585951786409371, "stacked_with_tree": 0.6338142146723371}, "3D-only GNN-ECC": {"alone_thr0.5": 0.23057422818776807, "alone_thrTuned": 0.39605366953027676, "stacked_with_tree": 0.6270529629522549}, "2D tree ensemble (baseline)": {"alone_thr0.5": 0.5608235208248546, "alone_thrTuned": 0.6263692505346113}}

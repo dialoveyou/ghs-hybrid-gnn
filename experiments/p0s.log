@@ -1,0 +1,20 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[02:55:19] checkpoint loaded into architecture without shape errors
+[02:55:19] running GNN on test set ...
+[02:55:20] GNN-ECC   (published thresholds) macro-F1 = 0.5750   [paper 0.5753]
+[02:55:20] Stacked   (published alphas/thr) macro-F1 = 0.6394   [paper 0.6394]
+[02:55:57] 
+[02:55:57] === test macro-F1, same split, same test set ===
+[02:55:57]   paper_baseline_thr0.5              0.5728
+[02:55:57]   baseline_trainonly_Optuna50        0.6239
+[02:55:57]   baseline_trainonly_grid            0.6269
+[02:55:57]   baseline_trainval_grid             0.6444
+[02:55:57]   stacked (published)                0.6394
+[02:55:57] 
+[02:55:57] === paired bootstrap, 5000 resamples: stacked minus baseline ===
+[02:57:10]   vs paper_baseline_thr0.5              Δ=+0.0666  95% CI [+0.0550, +0.0785]  p=0.0000  significant
+[02:58:28]   vs baseline_trainonly_Optuna50        Δ=+0.0155  95% CI [+0.0021, +0.0290]  p=0.0248  significant
+[02:59:49]   vs baseline_trainonly_grid            Δ=+0.0126  95% CI [-0.0010, +0.0258]  p=0.0700  not significant
+[03:01:08]   vs baseline_trainval_grid             Δ=-0.0054  95% CI [-0.0236, +0.0086]  p=0.5104  not significant
+[03:01:08] saved p0_stacked_results.json

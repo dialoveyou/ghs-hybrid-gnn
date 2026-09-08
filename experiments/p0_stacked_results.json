@@ -1,0 +1,48 @@
+{
+  "gnn_f1": 0.5750249006662432,
+  "stacked_f1": 0.6393615709063448,
+  "baselines": {
+    "paper_baseline_thr0.5": 0.5728310126263149,
+    "baseline_trainonly_Optuna50": 0.6239105481369033,
+    "baseline_trainonly_grid": 0.62686067178909,
+    "baseline_trainval_grid": 0.6443579971088327
+  },
+  "bootstrap": {
+    "paper_baseline_thr0.5": {
+      "delta": 0.06655439702050482,
+      "ci": [
+        0.0549866385329363,
+        0.07849656143637304
+      ],
+      "p": 0.0,
+      "sig": "significant"
+    },
+    "baseline_trainonly_Optuna50": {
+      "delta": 0.01550962520424903,
+      "ci": [
+        0.0021246111440558022,
+        0.028994581216915262
+      ],
+      "p": 0.0248,
+      "sig": "significant"
+    },
+    "baseline_trainonly_grid": {
+      "delta": 0.012569932611176707,
+      "ci": [
+        -0.0009639039358716461,
+        0.025849254092886697
+      ],
+      "p": 0.07,
+      "sig": "not significant"
+    },
+    "baseline_trainval_grid": {
+      "delta": -0.00538245481619839,
+      "ci": [
+        -0.02360688258368527,
+        0.008581899932527368
+      ],
+      "p": 0.5104,
+      "sig": "not significant"
+    }
+  }
+}

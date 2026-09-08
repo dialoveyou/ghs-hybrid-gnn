@@ -1,0 +1,22 @@
+[03:28:50] recovering 3D-embedding mask and Murcko scaffolds for 14148 compounds ...
+[03:29:44]   3000/14148
+[03:31:02]   6000/14148
+[03:32:07]   9000/14148
+[03:33:17]   12000/14148
+[03:34:03] 3D-embedding success 14145 (expected 14,145)
+[03:34:04] unique Murcko scaffolds: 8114 (paper: 8,114)
+[03:34:04] scaffold split: train 9742 / test 4403 (paper: 9,742 / 4,403)
+[03:34:04]   scaffold train/val/test = 8012 / 1730 / 4403
+[03:34:04] fitting tree ensemble on scaffold-train ...
+[03:36:39]   done (155s)
+[03:36:48]   scaffold baseline @0.5    = 0.4527   (paper reports 0.454/0.469)
+[03:36:48]   scaffold baseline @tuned  = 0.5390
+[03:36:48] 5-fold CV (threshold tuned inside each fold) ...
+[03:39:55]   fold 1: @0.5 0.5608 | @tuned 0.6264  (187s)
+[03:42:59]   fold 2: @0.5 0.5624 | @tuned 0.6480  (183s)
+[03:46:03]   fold 3: @0.5 0.5968 | @tuned 0.6704  (184s)
+[03:49:14]   fold 4: @0.5 0.5452 | @tuned 0.6370  (190s)
+[03:52:14]   fold 5: @0.5 0.5708 | @tuned 0.6376  (180s)
+[03:52:14]   CV @0.5   = 0.5672 +/- 0.0170   (paper 0.5806 +/- 0.0157)
+[03:52:14]   CV @tuned = 0.6439 +/- 0.0149
+[03:52:14] RESULTS {"scaffold_baseline_thr0.5": 0.4526896727769081, "scaffold_baseline_thrTuned": 0.5389951195266532, "cv_thr0.5_mean": 0.5672191385491193, "cv_thr0.5_std": 0.016957529752518612, "cv_thrTuned_mean": 0.6438690604255108, "cv_thrTuned_std": 0.014905818234360246, "cv_folds_thr0.5": [0.5608235208248546, 0.5624102978236113, 0.5968122200667784, 0.5452002607756825, 0.5708493932546701], "cv_folds_thrTuned": [0.6263692505346113, 0.6479649866092786, 0.6703649445931874, 0.6370358209203745, 0.6376102994701025]}

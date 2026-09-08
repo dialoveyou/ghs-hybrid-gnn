@@ -1,0 +1,4 @@
+tree(tuned) -> tree+2D+3D                        Δ=+0.0104  CI [+0.0028, +0.0188]  p=0.0072  significant
+tree(tuned) -> tree+2D-only                      Δ=+0.0075  CI [-0.0013, +0.0166]  p=0.0932  not significant
+tree+2D-only -> tree+2D+3D  [the 3D increment]   Δ=+0.0029  CI [-0.0060, +0.0117]  p=0.5096  not significant
+tree(tuned) -> tree+3D-only                      Δ=+0.0007  CI [-0.0028, +0.0053]  p=0.7920  not significant
