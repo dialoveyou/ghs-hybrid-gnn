@@ -1,0 +1,44 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[06:48:08] ===== outer fold 1: train 9061 / val 2281 / test 2803 =====
+[06:52:24]   tree  @0.5 0.5608 | calibrated 0.6264
+[06:54:03]   d2    alone 0.5860 | stacked 0.6338
+[06:55:01]   d3    alone 0.3961 | stacked 0.6271
+[06:58:11]   both  alone 0.5777 | stacked 0.6369
+[06:58:11]   fold 1 3D increment +0.0031   (603s)
+[06:58:12] ===== outer fold 2: train 8993 / val 2311 / test 2841 =====
+[07:02:14]   tree  @0.5 0.5624 | calibrated 0.6480
+[07:03:12]   d2    alone 0.5747 | stacked 0.6427
+[07:04:37]   d3    alone 0.4143 | stacked 0.6448
+[07:09:02]   both  alone 0.6016 | stacked 0.6532
+[07:09:02]   fold 2 3D increment +0.0105   (651s)
+[07:09:02] ===== outer fold 3: train 9041 / val 2243 / test 2861 =====
+[07:13:18]   tree  @0.5 0.5968 | calibrated 0.6704
+[07:15:48]   d2    alone 0.5967 | stacked 0.6628
+[07:18:20]   d3    alone 0.4502 | stacked 0.6678
+[07:22:24]   both  alone 0.6097 | stacked 0.6782
+[07:22:24]   fold 3 3D increment +0.0154   (802s)
+[07:22:25] ===== outer fold 4: train 9073 / val 2265 / test 2807 =====
+[07:26:45]   tree  @0.5 0.5452 | calibrated 0.6370
+[07:28:19]   d2    alone 0.5872 | stacked 0.6320
+[07:30:01]   d3    alone 0.4362 | stacked 0.6402
+[07:34:21]   both  alone 0.6093 | stacked 0.6446
+[07:34:21]   fold 4 3D increment +0.0126   (716s)
+[07:34:21] ===== outer fold 5: train 9045 / val 2267 / test 2833 =====
+[07:38:40]   tree  @0.5 0.5708 | calibrated 0.6376
+[07:41:17]   d2    alone 0.5890 | stacked 0.6387
+[07:44:17]   d3    alone 0.4489 | stacked 0.6440
+[07:48:44]   both  alone 0.5897 | stacked 0.6509
+[07:48:44]   fold 5 3D increment +0.0122   (863s)
+[07:48:44] 
+[07:48:44] === nested CV, mean ± SD over 5 outer folds ===
+[07:48:44]   tree_0.5       +0.5672 ± 0.0190
+[07:48:44]   tree_cal       +0.6439 ± 0.0167
+[07:48:44]   d2_alone       +0.5867 ± 0.0079
+[07:48:44]   d3_alone       +0.4291 ± 0.0234
+[07:48:44]   both_alone     +0.5976 ± 0.0138
+[07:48:44]   stack_d2       +0.6420 ± 0.0124
+[07:48:44]   stack_d3       +0.6448 ± 0.0147
+[07:48:44]   stack_both     +0.6527 ± 0.0156
+[07:48:44]   increment_3d   +0.0107 ± 0.0046
+[07:48:44]   calibration gain +0.0766 ± 0.0116

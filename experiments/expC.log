@@ -1,0 +1,8 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[05:52:34]   original  both  alone 0.5777 | stacked 0.6369  (183s)
+[05:54:14]   original  d2    alone 0.5860 | stacked 0.6338  (100s)
+[05:54:14]   original  --> 3D increment +0.0031
+[05:57:18]   reversed  both  alone 0.5936 | stacked 0.6368  (183s)
+[05:59:41]   reversed  d2    alone 0.6005 | stacked 0.6335  (143s)
+[05:59:41]   reversed  --> 3D increment +0.0033

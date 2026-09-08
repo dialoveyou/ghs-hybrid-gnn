@@ -1,8 +1,8 @@
-# Threshold Calibration vs. 3D Structure in Multi-Label GHS Hazard Classification
+# Threshold Calibration vs. Representation Choice in Multi-Label GHS Hazard Classification
 
 Code, data, trained weights and experiment scripts for:
 
-> Kim, D.; Jung, S.-h. *Per-Class Threshold Calibration Outweighs 3D Structural Information in
+> Kim, D.; Jung, S.-h. *Per-Class Threshold Calibration Dominates Representation Choice in
 > Severely Imbalanced Multi-Label GHS Hazard Classification.* ACS Omega (submitted).
 
 The task is predicting all **22 consolidated GHS hazard classes simultaneously** from molecular
@@ -19,28 +19,42 @@ Holding the fitted model, the data and the partition constant, and changing only
 | a fixed 0.5 threshold | 0.561 |
 | per-class thresholds calibrated on a held-out validation set | **0.626** |
 
-That is **+0.066** for free. The same contrast holds under five-fold cross-validation
-(0.567 ± 0.017 → 0.644 ± 0.015) and is largest exactly where generalization is hardest, under a
-Murcko-scaffold-disjoint split (0.453 → 0.539, **+0.086**).
+That is **+0.066** for free. The same contrast holds under nested five-fold cross-validation,
+where every selection step — tree hyperparameters, the 22 thresholds, the 22 blend weights — is
+confined to an inner validation split (0.567 ± 0.019 → 0.644 ± 0.017, **+0.077 ± 0.012**), and it
+is largest exactly where generalization is hardest, under a Murcko-scaffold-disjoint split
+(0.453 → 0.539, **+0.086**).
+
+The gain does not come from the classes whose thresholds are noisiest. Restricting the macro
+average to the 14 classes with test support ≥ 50 raises it to **+0.094**; the eight rarest classes
+contribute **+0.016** (`expBDE_analyses.py`).
 
 Against that, changing the molecular representation buys very little. With every model calibrated
 identically and trained on an identical sample set:
 
-| Model | Macro-F1 (calibrated) |
-|---|---|
-| 2D tree ensemble | 0.626 |
-| 2D-only MLP-ECC | 0.586 |
-| 2D–3D hybrid GNN-ECC | 0.578 |
-| 3D-only GNN-ECC | 0.396 |
-| Stacked: tree + 3D-only | 0.627 |
-| Stacked: tree + 2D-only | 0.634 |
-| **Stacked: tree + 2D–3D hybrid** | **0.637** |
+| Model | Macro-F1, single split (5 seeds) | Macro-F1, nested CV (5 folds) |
+|---|---|---|
+| 2D tree ensemble | 0.626 | 0.644 ± 0.017 |
+| 2D-only MLP-ECC | 0.587 ± 0.004 | 0.587 ± 0.008 |
+| 2D–3D hybrid GNN-ECC | 0.589 ± 0.008 | 0.598 ± 0.014 |
+| 3D-only GNN-ECC | 0.433 ± 0.022 | 0.429 ± 0.023 |
+| Stacked: tree + 3D-only | 0.630 ± 0.003 | 0.645 ± 0.015 |
+| Stacked: tree + 2D-only | 0.633 ± 0.003 | 0.642 ± 0.012 |
+| **Stacked: tree + 2D–3D hybrid** | **0.638 ± 0.003** | **0.653 ± 0.016** |
 
-A 3D-only model reaches 0.396 against 0.626 for 2D fingerprints, and adding the 3D branch to a
-2D-only neural model makes it slightly *worse*. Inside the stack, the increment attributable to the
-3D branch is **+0.003 (paired bootstrap, p = 0.51)** — indistinguishable from zero. The residual
-+0.010 of the best stack over the calibrated tree ensemble is model-family diversity, not 3D
-information.
+A 3D-only model reaches 0.429 against 0.644 for 2D fingerprints. Inside the stack, the increment
+attributable to the 3D branch is **+0.011 ± 0.005 under nested CV, positive in all five folds** —
+small but not zero, and roughly **one seventh** of what threshold calibration is worth on the same
+basis. On a single split it measures only +0.003 (paired bootstrap, p = 0.51) and its sign flips
+under one of five classifier-chain orderings, so a single realization cannot resolve it.
+
+> **A retraction from the first release.** An earlier version of this README reported that adding
+> the 3D branch to a 2D-only neural model makes it slightly *worse* (0.578 vs 0.586), and that the
+> 3D increment is indistinguishable from zero. Both came from a single seed.
+> `expA_multiseed.py` shows the ordering reverses over five seeds (hybrid 0.589 ± 0.008 vs
+> 2D-only 0.587 ± 0.004, a difference smaller than either SD), and `expF_nestedcv.py` shows the
+> increment is positive in every outer fold. The paper's central claim — calibration dominates
+> representation — is unchanged and, on the nested estimate, stronger.
 
 ### Why this is easy to get wrong
 
@@ -69,6 +83,10 @@ experiments/               the analyses reported in the paper
   abl_boot.py              paired bootstrap for the ablation contrasts
   stage3.py                scaffold-disjoint split and 5-fold CV with calibrated thresholds
   recompute_tables.py      per-class tables, low-support CIs, head-to-head endpoints
+  expA_multiseed.py        every neural configuration under five random seeds
+  expBDE_analyses.py       threshold stability, negative-label sensitivity, duplicate structures
+  expC_chainorder.py       the 3D increment under five classifier-chain orderings
+  expF_nestedcv.py         nested cross-validation of the entire selection procedure
   make_figures.py          Figures 4 and 5
   *.json / *.log           results and run logs for every script above
 notebooks/
@@ -113,7 +131,15 @@ python experiments/ablation.py        # the three representations + stacks  (~5 
 python experiments/abl_boot.py        # paired bootstrap                    (~4 min)
 python experiments/stage3.py          # scaffold split + 5-fold CV          (~25 min)
 python experiments/recompute_tables.py
-python experiments/make_figures.py
+
+# defensive analyses (§4.9 of the paper) — each writes its own *_results.json
+python experiments/expA_multiseed.py   # five seeds per configuration        (~50 min)
+python experiments/expBDE_analyses.py  # threshold stability, label noise,
+                                       # duplicates and chemical-space overlap (~35 min)
+python experiments/expC_chainorder.py  # five classifier-chain orderings     (~55 min)
+python experiments/expF_nestedcv.py    # nested five-fold cross-validation   (~90 min)
+
+python experiments/make_figures.py     # needs expA_results.json
 ```
 
 Every script writes a `*_results.json` next to itself; those files are the source of every number
@@ -133,9 +159,11 @@ exactly:
 | Scaffold split train/test | 9,742 / 4,403 | 9,742 / 4,403 |
 
 Model metrics carry ordinary run-to-run variance of roughly ±0.01–0.02 macro-F1 from GNN
-initialisation and sampler order; the tree-ensemble numbers are deterministic given the split. The
-qualitative conclusions — that calibration is worth several times more than representation, and
-that the 3D increment is indistinguishable from zero — do not depend on that variance.
+initialisation and sampler order; the tree-ensemble numbers are deterministic given the split.
+That variance is large enough to invert differences between the neural configurations, which is
+why every neural number reported here is a mean over five seeds or five folds rather than a single
+run — see the retraction note above. The conclusion that calibration is worth several times more
+than representation is an order of magnitude clear of that variance and does not depend on it.
 
 ## Data
 

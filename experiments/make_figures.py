@@ -1,7 +1,10 @@
 """Regenerate Figures 4 and 5 from the calibrated results.
 
-Figure 4  macro-F1 for every configuration under both threshold protocols.
-Figure 5  what threshold calibration is worth under each evaluation protocol.
+Figure 4  macro-F1 for every configuration under both threshold protocols. Calibrated bars are
+          the five-seed mean from expA_multiseed.py with +/- 1 SD error bars; a single training
+          run puts the 2D-3D hybrid below the 2D-only model, which five seeds show to be noise.
+Figure 5  what threshold calibration is worth under each evaluation protocol. The
+          cross-validation row is the outer-fold spread of the nested protocol (expF).
 
 Colour: categorical slots 1 and 2 of the validated reference palette
 (#2a78d6 / #eb6834; CVD dE 24.7, normal-vision dE 33.6, both PASS).
@@ -23,7 +26,16 @@ plt.rcParams.update({
     "savefig.facecolor": SURFACE,
 })
 
-T2 = json.load(open("/tmp/exp/new_tables.json"))["table2"]
+T2 = json.load(open("new_tables.json"))["table2"]
+A  = json.load(open("expA_results.json"))
+
+CAL = {"stack_both": (A["both_stacked_mean"], A["both_stacked_sd"]),
+       "stack_d2":   (A["d2_stacked_mean"],   A["d2_stacked_sd"]),
+       "stack_d3":   (A["d3_stacked_mean"],   A["d3_stacked_sd"]),
+       "tree":       (A["tree_calibrated"],   0.0),
+       "d2_alone":   (A["d2_alone_mean"],     A["d2_alone_sd"]),
+       "both_alone": (A["both_alone_mean"],   A["both_alone_sd"]),
+       "d3_alone":   (A["d3_alone_mean"],     A["d3_alone_sd"])}
 
 # ---------------------------------------------------------------- Figure 4
 ROWS = [("Stacked: tree + 2D–3D hybrid", "stack_both"),
@@ -38,36 +50,39 @@ fig, ax = plt.subplots(figsize=(6.0, 3.634), dpi=300)
 h = 0.34
 ys = list(range(len(ROWS)))[::-1]
 for y, (label, key) in zip(ys, ROWS):
-    v05, vcal = T2[key]["macro_f1_at_0.5"], T2[key]["macro_f1"]
+    v05 = T2[key]["macro_f1_at_0.5"]
+    vcal, sd = CAL[key]
     ax.barh(y + h/2 + 0.012, v05,  height=h, color=C_HALF, edgecolor=SURFACE, linewidth=1.0, zorder=3)
-    ax.barh(y - h/2 - 0.012, vcal, height=h, color=C_CAL,  edgecolor=SURFACE, linewidth=1.0, zorder=3)
+    ax.barh(y - h/2 - 0.012, vcal, height=h, color=C_CAL,  edgecolor=SURFACE, linewidth=1.0, zorder=3,
+            xerr=(sd if sd > 0 else None),
+            error_kw=dict(ecolor=INK2, elinewidth=0.8, capsize=2, capthick=0.8, zorder=4))
     ax.text(v05 + 0.006,  y + h/2 + 0.012, f"{v05:.3f}",  va="center", ha="left", fontsize=7, color=INK2)
-    ax.text(vcal + 0.006, y - h/2 - 0.012, f"{vcal:.3f}", va="center", ha="left",
+    ax.text(vcal + sd + 0.010, y - h/2 - 0.012, f"{vcal:.3f}", va="center", ha="left",
             fontsize=7, color=INK, fontweight="bold")
 
 ax.set_yticks(ys); ax.set_yticklabels([r[0] for r in ROWS], color=INK)
-ax.set_xlim(0, 0.78); ax.set_xlabel("Macro-F1 (test set, n = 2,803)", color=INK2)
+ax.set_xlim(0, 0.80); ax.set_xlabel("Macro-F1 (test set, n = 2,803)", color=INK2)
 ax.xaxis.grid(True, color="#e6e5e0", linewidth=0.6, zorder=0)
 ax.set_axisbelow(True)
 for s in ("top", "right", "left"): ax.spines[s].set_visible(False)
 ax.set_ylim(-0.72, 6.78)
 ax.axhline(3.5, color=MUTED, linewidth=0.6, linestyle=(0, (3, 3)), zorder=1)
-ax.text(0.757, 6.52, "stacked with the tree ensemble", ha="right", fontsize=7,
+ax.text(0.777, 6.52, "stacked with the tree ensemble", ha="right", fontsize=7,
         color=MUTED, style="italic", va="center")
-ax.text(0.757, 3.30, "single model", ha="right", fontsize=7,
+ax.text(0.777, 3.30, "single model", ha="right", fontsize=7,
         color=MUTED, style="italic", va="center")
 ax.legend(handles=[Line2D([], [], color=C_HALF, lw=6, label="Fixed 0.5 threshold"),
                    Line2D([], [], color=C_CAL,  lw=6, label="Per-class calibrated threshold")],
-          loc="upper center", bbox_to_anchor=(0.5, -0.20), ncol=2, frameon=False,
-          fontsize=7.5, labelcolor=INK2, handlelength=1.1, borderpad=0.2,
-          columnspacing=1.6)
+          loc="upper left", bbox_to_anchor=(-0.005, -0.115), ncol=2, frameon=False,
+          fontsize=7, labelcolor=INK2, handlelength=1.1, borderpad=0.2,
+          columnspacing=1.4, handletextpad=0.5)
 fig.tight_layout(pad=0.5)
-fig.savefig("/tmp/exp/figure4.png", dpi=300)
+fig.savefig("figure4.png", dpi=300)
 print("figure4.png written")
 
 # ---------------------------------------------------------------- Figure 5
 PROTO = [("Murcko\nscaffold-disjoint", 0.4527, 0.5390, None,   None),
-         ("Five-fold\ncross-validation", 0.5672, 0.6439, 0.0170, 0.0149),
+         ("Nested five-fold\ncross-validation", 0.5672, 0.6439, 0.0190, 0.0167),
          ("Random split",                0.5608, 0.6264, None,   None)]
 
 fig, ax = plt.subplots(figsize=(4.2, 4.013), dpi=300)
@@ -98,5 +113,5 @@ ax.legend(handles=[Line2D([], [], marker="o", color=SURFACE, markerfacecolor=C_H
           fontsize=7.5, labelcolor=INK2, handlelength=1.0, ncol=2, borderpad=0.2,
           columnspacing=1.4)
 fig.tight_layout(pad=0.5)
-fig.savefig("/tmp/exp/figure5.png", dpi=300)
+fig.savefig("figure5.png", dpi=300)
 print("figure5.png written")

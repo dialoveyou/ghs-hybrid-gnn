@@ -54,3 +54,10 @@ lifts it from 0.561 to 0.626, and the stacked model's advantage over it then fal
 stacked model from the checkpoint in `checkpoints/` and runs a paired bootstrap against each
 baseline variant; `experiments/ablation.py` isolates the contribution of the 3D branch. Those three
 scripts are the source of the paper's results.
+
+Four further scripts test whether those results survive the choices made along the way:
+`expA_multiseed.py` (five random seeds per configuration), `expBDE_analyses.py` (threshold
+stability, the unobserved-H-code-as-negative assumption, duplicate structures and train/test
+chemical-space overlap), `expC_chainorder.py` (five classifier-chain label orderings) and
+`expF_nestedcv.py` (the whole selection procedure repeated inside five outer folds). The nested
+estimates are the ones the paper treats as primary.

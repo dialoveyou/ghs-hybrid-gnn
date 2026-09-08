@@ -1,0 +1,33 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[05:00:14] ===== seed 42 =====
+[05:03:20]   both  alone 0.5777 | stacked 0.6369   (186s)
+[05:05:03]   d2    alone 0.5860 | stacked 0.6338   (103s)
+[05:06:05]   d3    alone 0.3961 | stacked 0.6271   (62s)
+[05:06:05]   --> 3D increment (stack both - stack 2D-only) = +0.0031
+[05:06:05] ===== seed 123 =====
+[05:10:22]   both  alone 0.5955 | stacked 0.6424   (256s)
+[05:12:18]   d2    alone 0.5867 | stacked 0.6363   (117s)
+[05:14:02]   d3    alone 0.4360 | stacked 0.6278   (104s)
+[05:14:02]   --> 3D increment (stack both - stack 2D-only) = +0.0061
+[05:14:02] ===== seed 456 =====
+[05:17:51]   both  alone 0.5943 | stacked 0.6392   (229s)
+[05:19:15]   d2    alone 0.5890 | stacked 0.6285   (84s)
+[05:22:13]   d3    alone 0.4362 | stacked 0.6332   (178s)
+[05:22:13]   --> 3D increment (stack both - stack 2D-only) = +0.0107
+[05:22:13] ===== seed 789 =====
+[05:25:45]   both  alone 0.5947 | stacked 0.6386   (212s)
+[05:28:07]   d2    alone 0.5918 | stacked 0.6361   (142s)
+[05:30:46]   d3    alone 0.4468 | stacked 0.6327   (158s)
+[05:30:46]   --> 3D increment (stack both - stack 2D-only) = +0.0025
+[05:30:46] ===== seed 2024 =====
+[05:34:06]   both  alone 0.5839 | stacked 0.6338   (200s)
+[05:35:55]   d2    alone 0.5820 | stacked 0.6310   (109s)
+[05:38:18]   d3    alone 0.4501 | stacked 0.6270   (143s)
+[05:38:18]   --> 3D increment (stack both - stack 2D-only) = +0.0027
+[05:38:18] 
+[05:38:18] tree (calibrated, deterministic)     0.6264
+[05:38:18] 3D-only        alone 0.4330 ± 0.0216 | stacked 0.6295 ± 0.0031
+[05:38:18] 2D-only        alone 0.5871 ± 0.0036 | stacked 0.6332 ± 0.0034
+[05:38:18] 2D-3D hybrid   alone 0.5892 ± 0.0080 | stacked 0.6382 ± 0.0032
+[05:38:18] 3D INCREMENT  +0.0050 ± 0.0035  (per seed: +0.0031, +0.0061, +0.0107, +0.0025, +0.0027)

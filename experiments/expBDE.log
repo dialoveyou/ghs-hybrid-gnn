@@ -1,0 +1,37 @@
+[05:48:47] B — bootstrap stability of the calibrated thresholds (400 resamples of validation)
+[05:49:02]    01_Explosive_SelfReactive        tau=0.600  SD 0.247  95% CI [0.06, 0.60]  n_val=25
+[05:49:02]    02_Flammable_Gas                 tau=0.290  SD 0.087  95% CI [0.15, 0.52]  n_val=12
+[05:49:02]    03_Gas_Under_Pressure            tau=0.635  SD 0.109  95% CI [0.35, 0.70]  n_val=23
+[05:49:02]    04_Flammable_Liquid              tau=0.345  SD 0.038  95% CI [0.31, 0.47]  n_val=371
+[05:49:02]    05_Flammable_Solid               tau=0.080  SD 0.051  95% CI [0.07, 0.22]  n_val=35
+[05:49:02]    06_Spontaneous_Combustion        tau=0.425  SD 0.170  95% CI [0.08, 0.61]  n_val=34
+[05:49:02]    07_Oxidizing                     tau=0.200  SD 0.150  95% CI [0.08, 0.75]  n_val=40
+[05:49:02]    08_Corrosive_to_Metals           tau=0.195  SD 0.047  95% CI [0.07, 0.26]  n_val=40
+[05:49:02]    09_Acute_Toxicity_Oral           tau=0.380  SD 0.028  95% CI [0.33, 0.43]  n_val=1027
+[05:49:02]    10_Acute_Toxicity_Dermal         tau=0.255  SD 0.039  95% CI [0.16, 0.30]  n_val=402
+[05:49:02]    11_Acute_Toxicity_Inhalation     tau=0.305  SD 0.046  95% CI [0.22, 0.35]  n_val=531
+[05:49:02]    12_Aspiration_Hazard             tau=0.505  SD 0.119  95% CI [0.17, 0.51]  n_val=73
+[05:49:02]    13_Skin_Corrosion_Irritation     tau=0.465  SD 0.045  95% CI [0.32, 0.50]  n_val=1366
+[05:49:02]    14_Eye_Damage_Irritation         tau=0.480  SD 0.041  95% CI [0.33, 0.49]  n_val=1475
+[05:49:02]    15_Sensitization                 tau=0.270  SD 0.024  95% CI [0.21, 0.33]  n_val=443
+[05:49:02]    16_Mutagenicity                  tau=0.245  SD 0.050  95% CI [0.15, 0.33]  n_val=139
+[05:49:02]    17_Carcinogenicity               tau=0.240  SD 0.043  95% CI [0.16, 0.29]  n_val=216
+[05:49:02]    18_Reproductive_Toxicity         tau=0.235  SD 0.032  95% CI [0.19, 0.32]  n_val=300
+[05:49:02]    19_STOT_Single_Exposure_Merged   tau=0.350  SD 0.035  95% CI [0.29, 0.42]  n_val=1068
+[05:49:02]    20_STOT_Repeated_Exposure        tau=0.265  SD 0.033  95% CI [0.21, 0.33]  n_val=413
+[05:49:02]    21_Aquatic_Hazard                tau=0.365  SD 0.026  95% CI [0.31, 0.41]  n_val=877
+[05:49:02]    22_Ozone_Layer_Hazard            tau=0.365  SD 0.077  95% CI [0.33, 0.55]  n_val=5
+[05:49:02]    classes with tau at the grid boundary: 0 []
+[05:49:02]    calibration gain  all 22 classes +0.0655 | only support>=50 (14) +0.0941 | only support<50 (8) +0.0155
+[05:49:02] 
+[05:49:02] D — sensitivity to unrecorded positives in low-prevalence classes
+[05:49:03]    +10% unrecorded positives in the 8 rare classes: tree 0.6164 | stacked 0.6264 | 3D increment +0.0028 ± 0.0003
+[05:49:04]    +25% unrecorded positives in the 8 rare classes: tree 0.6010 | stacked 0.6104 | 3D increment +0.0024 ± 0.0002
+[05:49:05]    +50% unrecorded positives in the 8 rare classes: tree 0.5813 | stacked 0.5899 | 3D increment +0.0022 ± 0.0005
+[05:49:05] 
+[05:49:05] E — duplicates and train/test similarity
+[05:49:08]    14145 rows | 12930 unique canonical SMILES | 1034 structures appearing more than once (max 8 copies)
+[05:49:08]    8114 scaffolds | 6962 singletons | largest 2150 compounds
+[05:49:13]    random    split: mean T_max 0.646 | median 0.615 | >=0.9 20.7% | >=0.99 16.5% | <=0.4 14.3%
+[05:49:19]    scaffold  split: mean T_max 0.546 | median 0.500 | >=0.9 6.5% | >=0.99 4.0% | <=0.4 21.0%
+[05:49:19] saved expBDE_results.json

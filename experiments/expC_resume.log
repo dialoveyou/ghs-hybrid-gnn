@@ -1,0 +1,12 @@
+/usr/local/lib/python3.11/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[06:32:44]   random1 both  alone 0.5900 | stacked 0.6451 (267s)
+[06:35:07]   random1 d2    alone 0.5822 | stacked 0.6378 (143s)
+[06:35:07]   random1 --> 3D increment +0.0073
+[06:39:33]   random2 both  alone 0.5868 | stacked 0.6335 (266s)
+[06:41:54]   random2 d2    alone 0.5953 | stacked 0.6325 (141s)
+[06:41:54]   random2 --> 3D increment +0.0010
+[06:46:17]   random3 both  alone 0.5989 | stacked 0.6396 (263s)
+[06:47:51]   random3 d2    alone 0.5822 | stacked 0.6407 (94s)
+[06:47:51]   random3 --> 3D increment -0.0011
+[06:47:51] 3D increment across 5 chain orderings: +0.0027 ± 0.0031 (range -0.0011 to +0.0073)
